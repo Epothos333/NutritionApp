@@ -1,0 +1,9 @@
+{% if latest_food_list %}
+    <ul>
+    {% for food in latest_food_list %}
+        <li><a href="/nutritionCalculator/{{ food.id }}/">{{ food.food_choice }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
