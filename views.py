@@ -25,7 +25,7 @@ def vote(request):
     return HttpResponse("You're not voting because You haven't registered to my lfie")
 
 def add_food(request):
-    form_class = FoodForm
+    form_class = FoodForm()
 
     if form_class.is_valid():
         ingredient_name = request.POST.get(
