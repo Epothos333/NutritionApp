@@ -2,6 +2,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from django.http import HttpResponse
+from django.template.loader import get_template
+from django.template import Context
 
 from .models import Food
 from .forms import FoodForm
@@ -22,16 +24,27 @@ def results(request, food_id):
 def vote(request):
     return HttpResponse("You're not voting because You haven't registered to my lfie")
 
-def get_food_details(request):
+def add_food(request):
     form_class = FoodForm
 
+    if form_class.is_valid():
+        ingredient_name = request.POST.get(
+            'ingredient_name'
+            , '')
+        fats = request.POST.get(
+            'fats'
+            , '')
+        carbs = request.POST.get(
+            'carbs'
+            , '')
+        proteins = request.POST.get(
+            'proteins'
+            , '')
 
-    # if request.method == 'POST':
-    #     form = FoodForm(request.POST)
-    #     if form.is_valid():
-    #         return HttpResponseRedirect('/thanks/')
-    #
-    # else:
-    #     form = FoodForm()
+        newFood = Food(food_choice=ingredient_name, fats=fats, proteins=proteins, carbs=carbs);
+        newFood.save()
+
+
+        #Food Constructor? then save?
 
     return render(request, 'nutritionCalculator/add.html', {'form': form_class})
