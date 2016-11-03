@@ -1,0 +1,11 @@
+<h1>hello</h1>
+
+{% csrf_token %}
+{% for food in food_list %}
+
+    <h3>{{food.food_choice}}</h3>
+    <p>{{food.fats}}</p>
+    <p>{{food.carbs}}</p>
+    <p>{{food.proteins}}</p>
+
+{% endfor %}
